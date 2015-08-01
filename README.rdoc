@@ -1,0 +1,2 @@
+Toyapp to see how to integrate with external apis using httparty.
+https://github.com/jnunemaker/httparty
