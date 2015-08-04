@@ -1,0 +1,15 @@
+<%= form_tag("/omdb", method: "post") do %>
+	<%= label_tag 'title' %>
+	<%= text_field_tag 'title' %><br/>
+	<%= label_tag 'year' %>
+	<%= text_field_tag 'year' %><br/>
+	<%= submit_tag 'Submit' %>
+<% end %>
+
+<% if !@response.nil? %>
+	<p><% test= JSON.parse(@response.body) %></p>
+
+	<% test.each do |t| %>
+		<%= t %><br/>
+	<% end %>
+<% end %>
