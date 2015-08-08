@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   get 'home', to: 'static_pages#home'
   post 'omdb', to: 'static_pages#omdb'
   get 'omdb', to: 'static_pages#omdb'
+  post 'mal', to: 'static_pages#mal'
+  get 'mal', to: 'static_pages#mal'
+  post 'reddit', to: 'static_pages#reddit'
+  get 'reddit', to: 'static_pages#reddit'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
