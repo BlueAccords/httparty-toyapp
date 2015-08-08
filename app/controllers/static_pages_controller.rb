@@ -38,12 +38,29 @@ class StaticPagesController < ApplicationController
   def reddit
     base_uri = "http://reddit.com/"
     username = params[:username]
-      @response = HTTParty.get("#{base_uri}user/IriFlina/comments.json")
+    if !username.nil?
+      @response = HTTParty.get("#{base_uri}user/#{username}/comments.json")
 
-      data = JSON.parse(@response.body)
-
-      data['data']['children'].each do |child|
-        puts child['data']['body']
-      end
+      @return = create_collection(JSON.parse(@response.body))
+      
+      # data['data']['children'].each do |child|
+      #   puts child['data']['body']
+      # end
+    end
   end
+
+  def create_collection(data)
+    return_arr = []
+    data['data']['children'].each do |child|
+        temp_hash = {}
+        temp_hash['link_title']        = child['data']['link_title']
+        temp_hash['link_author']       = child['data']['link_author']
+        temp_hash['body']              = child['data']['body']
+        temp_hash['author']            = child['data']['author']
+        temp_hash['subreddit']         = child['data']['subreddit']
+      return_arr.push(temp_hash)
+    end
+    return return_arr
+  end
+
 end

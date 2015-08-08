@@ -4,6 +4,12 @@
 	<%= submit_tag 'Submit' %>
 <% end %>
 
-<% if !@response.nil? %>
+<% if !@return.nil? %>
 	<h1>Success</h1>
+	<% @return.each do |hash| %>
+		<% hash.each do |k, v| %>
+			<%= "#{k} : #{v}"%><br/>
+		<% end %>
+		<br/>
+	<% end %>
 <% end %>
