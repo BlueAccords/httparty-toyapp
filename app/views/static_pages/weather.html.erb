@@ -1,0 +1,14 @@
+<%= form_tag("/weather", method: "post") do %>
+	<%= label_tag 'zipcode' %>
+	<%= text_field_tag 'zipcode' %><br/>
+	<%= submit_tag 'Submit' %>
+<% end %>
+
+
+<% if !@zipcode.nil? %>
+	<% @weather_lookup.each do |hash| %>
+		<h2><%= hash["temperature"] %></h2>
+		<%= image_tag(hash["icon_url"]) %>
+		<br/>
+	<% end %>
+<% end %>

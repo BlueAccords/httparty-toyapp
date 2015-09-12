@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'mal', to: 'static_pages#mal'
   post 'reddit', to: 'static_pages#reddit'
   get 'reddit', to: 'static_pages#reddit'
+  get 'weather', to: 'static_pages#weather'
+  post 'weather', to: 'static_pages#weather'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

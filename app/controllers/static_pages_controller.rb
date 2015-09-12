@@ -31,7 +31,6 @@ class StaticPagesController < ApplicationController
       @response = 
         HTTParty.get("#{base_uri}anime/search.json?q=#{title}", :basic_auth => auth)
         # this line below works.
-        # HTTParty.get("http://www.omdbapi.com/?t=kingsman&y=&plot=short&r=json")
     end
   end
 
@@ -53,7 +52,7 @@ class StaticPagesController < ApplicationController
     return_arr = []
     data['data']['children'].each do |child|
         temp_hash = {}
-        temp_hash['link_title']        = child['data']['link_title']
+        temp_hash['title']             = child['data']['link_title']
         temp_hash['link_author']       = child['data']['link_author']
         temp_hash['body']              = child['data']['body']
         temp_hash['author']            = child['data']['author']
@@ -62,5 +61,27 @@ class StaticPagesController < ApplicationController
     end
     return return_arr
   end
+
+  def weather 
+    @zipcode = params[:zipcode]
+    if !@zipcode.nil? 
+      @weather_lookup = WeatherRequest.new
+      @weather_lookup = weather_collection(
+                        @weather_lookup.fetch_weather(@zipcode))
+     # @return = create_collection_w(@weather_lookup)
+    end
+  end
+
+  def weather_collection(data)
+    return_arr = []
+    data['hourly_forecast'].each do |child|
+        temp_hash = {}
+        temp_hash['temperature']             = child['temp']['english']
+        temp_hash['icon_url']                = child['icon_url']        
+        return_arr.push(temp_hash)
+    end
+    return return_arr
+  end
+
 
 end
